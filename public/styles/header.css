@@ -1,0 +1,115 @@
+@font-face {
+    font-family: 'CustomFont';
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #3f3300;
+  }
+
+.navbar {
+    background: linear-gradient(to bottom, rgb(255, 251, 0), rgb(255, 196, 0)); /* Gradient from top to bottom */
+    border: none; /* Ensure no borders */
+    box-shadow: none; /* Ensure no shadows */
+}
+
+/* Ensure no borders or shadows on header and footer */
+header, footer {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background: inherit; /* Ensures no background color issues */
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    color: rgb(49, 49, 49); /* Change text color to white */
+    font-family: 'CustomFont', sans-serif; /* Apply custom font */
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(88, 88, 88); /* Change underline color to white */
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-nav .dropdown-menu {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.navbar-nav .nav-item:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #19860f;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #99b0e2;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Resetting any potential browser styling */
+header, footer, .navbar {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}

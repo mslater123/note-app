@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Your Note Taking App</title>
+  <link rel="stylesheet" href="/styles/index.css"> <!-- Link to the separate stylesheet -->
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Welcome to <%= title %></h1>
+      <p>Take control of your notes. Organize your thoughts. Improve your productivity.</p>
+      <div class="cta-buttons">
+        <a href="/login" class="btn">Login</a>
+        <a href="/register" class="btn">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="intro">
+      <h2>Why Choose <%= title %>?</h2>
+      <p>Our app provides a simple, intuitive platform to manage your notes and ideas, ensuring you never lose track of what's important.</p>
+    </section>
+
+    <section class="features">
+      <h3>Features</h3>
+      <ul>
+        <li>Quick and easy note creation</li>
+        <li>Organize notes with categories and tags</li>
+        <li>Access your notes anywhere, anytime</li>
+        <li>Secure and private with cloud sync</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
+<%- include('partials/footer') %>

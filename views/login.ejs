@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration Page</title>
+    <link rel="stylesheet" href="/styles/login.css"> <!-- Ensure correct path -->
+</head>
+<body>
+    <div class="container">
+        <div class="toggle-container">
+            <button id="login-toggle" class="toggle active">Login</button>
+            <button id="register-toggle" class="toggle">Register</button>
+        </div>
+        <div class="form-container">
+            <!-- Login Form -->
+            <form id="login-form" class="form active" action="/login" method="POST">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="login-username">Username:</label>
+                    <input type="text" id="login-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+                <p id="login-error-message"></p>
+
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="form" action="/register" method="POST">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label for="register-username">Username:</label>
+                    <input type="text" id="register-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <button type="submit">Register</button>
+                <p id="register-error-message"></p>
+            </form>
+        </div>
+    </div>
+    <script src="/scripts/login.js"></script> <!-- Ensure correct path -->
+</body>
+</html>
+<%- include('partials/footer') %>

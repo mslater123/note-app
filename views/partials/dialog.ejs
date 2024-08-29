@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Context Menu</title>
+    <style>
+        .sidebar-right {
+            margin: 92px auto 10px auto;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 350px;
+            overflow-y: auto;
+            padding: 5px; /* Reduced padding around the sidebar */
+            background-color: #f8f9fa;
+            border-left: 1px solid #dee2e6;
+            transition: width 0.2s, transform 0.2s;
+            z-index: 1; /* Lower value to place it behind the context menu */
+        }
+
+        .node-section {
+            margin-bottom: 0px; /* Reduced space between node sections */
+            padding: 0px; /* Padding inside each node section */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .node-header {
+            font-weight: bold;
+            margin-bottom: 0px; /* Reduced margin below the header */
+        }
+
+        .sidebar-right.hidden {
+            transform: translateX(100%);
+        }
+
+        .resizer {
+            width: 10px;
+            cursor: ew-resize;
+            position: absolute;
+            top: 0;
+            left: -5px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                #ccc,
+                #ccc 1px,
+                transparent 1px,
+                transparent 3px
+            );
+        }
+
+        .toggle-sidebar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .context-menu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .context-menu button {
+            display: block;
+            width: 100%;
+            border: none;
+            background: none;
+            padding: 5px 10px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .context-menu button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+    <link rel="stylesheet" href="/parameters/styles.css">
+</head>
+<body>
+    <!-- Toggle Sidebar Button -->
+    <button id="toggleSidebarButton" class="btn btn-primary toggle-sidebar">Toggle Sidebar</button>
+
+    <!-- Right Sidebar -->
+    <nav class="sidebar-right" id="rightSidebar">
+        <div class="resizer" id="resizer"></div>
+        <div id="nodeAttributes">
+            <div id="app">
+                <div id="selectedNodeDetails" class="node-section">
+                  <div class="node-content" id="nodeAttributes">
+                    <!-- Node attributes will be dynamically inserted here -->
+                  </div>
+                </div>
+        </div>
+    </nav>
+
+    <!-- Custom Context Menu -->
+    <div id="contextMenu" class="context-menu">
+        <button id="contextMenuLoad">Load</button>
+        <button id="contextMenuSave">Save</button>
+        <button id="contextMenuDelete">Delete</button>
+    </div>
+
+    <!--  <script type="module" src="parameters/parameters.js" defer></script> -->
+
+    <script>
+        const rightSidebar = document.getElementById('rightSidebar');
+        const resizer = document.getElementById('resizer');
+        const toggleSidebarButton = document.getElementById('toggleSidebarButton');
+        const contextMenu = document.getElementById('contextMenu');
+        const contextMenuLoad = document.getElementById('contextMenuLoad');
+        const contextMenuSave = document.getElementById('contextMenuSave');
+        const contextMenuDelete = document.getElementById('contextMenuDelete');
+        let clickedThumbnail = null;
+
+        // Resize functionality
+        resizer.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            document.addEventListener('mousemove', resizeSidebar);
+            document.addEventListener('mouseup', stopResize);
+        });
+
+        function resizeSidebar(e) {
+            const newWidth = window.innerWidth - e.clientX;
+            if (newWidth > 200 && newWidth < 800) {
+                rightSidebar.style.width = `${newWidth}px`;
+            }
+        }
+
+        function stopResize() {
+            document.removeEventListener('mousemove', resizeSidebar);
+            document.removeEventListener('mouseup', stopResize);
+        }
+
+        // Toggle Sidebar visibility
+        toggleSidebarButton.addEventListener('click', function () {
+            rightSidebar.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function () {
+            contextMenu.style.display = 'none';
+        });
+
+        contextMenuLoad.addEventListener('click', function () {
+            if (clickedThumbnail) {
+                console.log('Load:', clickedThumbnail.src);
+            }
+        });
+
+        contextMenuSave.addEventListener('click', function () {
+            if (clickedThumbnail) {
+                console.log('Save:', clickedThumbnail.src);
+            }
+        });
+
+        contextMenuDelete.addEventListener('click', function () {
+            if (clickedThumbnail) {
+                clickedThumbnail.remove();
+            }
+        });
+    </script>
+</body>
+</html>

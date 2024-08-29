@@ -1,0 +1,195 @@
+<%- include('partials/header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <link rel="stylesheet" href="/styles/dashboard.css"> <!-- Ensure correct path -->
+    <style>
+        /* Basic styling for the dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+        }
+
+        /* To-Do Form styling */
+        #add-todo {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+
+        #add-todo input, #add-todo textarea, #add-todo button, #add-todo input[type="color"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        #add-todo button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #add-todo button:hover {
+            background-color: #218838;
+        }
+
+        /* To-Do List styling */
+        #todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-item {
+            background-color: #ffffff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .todo-item strong {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .details {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .actions button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .actions .edit {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .actions .edit:hover {
+            background-color: #e0a800;
+        }
+
+        .actions .delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .actions .delete:hover {
+            background-color: #c82333;
+        }
+
+        .actions .view {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .actions .view:hover {
+            background-color: #0056b3;
+        }
+
+        /* Logout button styling */
+        form[action="/logout"] {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form[action="/logout"] button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form[action="/logout"] button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <%= username %>!</h1>
+        <p>This is your dashboard.</p>
+
+        <!-- To-Do Form -->
+        <form id="add-todo">
+            <input type="text" id="title" placeholder="Enter a title" required>
+            <textarea id="details" placeholder="Enter details" required></textarea>
+            <input type="color" id="color" value="#ffffff">
+            <button type="submit">Add</button>
+        </form>
+
+        <!-- To-Do List -->
+        <h2>Your To-Do List</h2>
+        <ul id="todo-list">
+            <% todos.forEach(todo => { 
+                const todoColor = todo.color || '#ffffff';
+            %>
+            <li class="todo-item" data-id="<%= todo._id %>" style="background-color: <%= todoColor %>">
+                <div>
+                    <strong><%= todo.title %></strong>
+                    <p class="details"><%= todo.details %></p>
+                </div>
+                <div class="actions">
+                    <button class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                    <button class="view">View</button>
+                </div>
+            </li>
+            <% }); %>
+        </ul>
+
+        <!-- Logout Button -->
+        <form action="/logout" method="GET">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <script src="/scripts/dashboard.js"></script>
+</body>
+</html>
+
+<%- include('partials/footer') %>

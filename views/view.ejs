@@ -1,0 +1,107 @@
+<%- include('partials/header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View To-Do</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        form input, form textarea, form button {
+            padding: 15px; /* Increased padding for a bigger text box */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form input[type="text"], form textarea {
+            font-size: 18px; /* Increase font size to make it visually larger */
+        }
+        form textarea {
+            height: 500px; /* Increased height for textarea */
+        }
+        form button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px; /* Increase button font size */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View To-Do</h1>
+        <form id="update-todo">
+            <input type="text" id="title" value="<%= todo.title %>" required>
+            <textarea id="details" required><%= todo.details %></textarea>
+            <input type="color" id="color" value="<%= todo.color %>">
+            <button type="submit">Update</button>
+        </form>
+        <form action="/dashboard">
+            <button type="submit">Back to Dashboard</button>
+        </form>
+    </div>
+
+    <script>
+        // Set the background color of the text inputs and textarea to the selected color
+        const titleInput = document.getElementById('title');
+        const detailsTextarea = document.getElementById('details');
+        const colorInput = document.getElementById('color');
+        
+        // Set initial background color based on the todo's color
+        titleInput.style.backgroundColor = colorInput.value;
+        detailsTextarea.style.backgroundColor = colorInput.value;
+
+        // Update the background color dynamically when the color input changes
+        colorInput.addEventListener('input', function() {
+            titleInput.style.backgroundColor = colorInput.value;
+            detailsTextarea.style.backgroundColor = colorInput.value;
+        });
+
+        document.getElementById('update-todo').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const todoId = '<%= todo._id %>';
+            const title = titleInput.value;
+            const details = detailsTextarea.value;
+            const color = colorInput.value;
+
+            try {
+                const response = await fetch(`/todos/todo/${todoId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, details, color })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update todo');
+                }
+
+                window.location.href = '/dashboard'; // Redirect back to dashboard after update
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+
+<%- include('partials/footer') %>
