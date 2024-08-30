@@ -21,6 +21,7 @@ body, html {
     background: linear-gradient(to bottom, rgb(255, 251, 0), rgb(255, 196, 0)); /* Gradient from top to bottom */
     border: none; /* Ensure no borders */
     box-shadow: none; /* Ensure no shadows */
+
 }
 
 /* Ensure no borders or shadows on header and footer */

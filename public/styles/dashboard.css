@@ -1,120 +1,145 @@
+/* Basic styling for the dashboard */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #3f3300;
 }
 
 .container {
-    width: 1400px; /* Increased container width to fit 3 items per row */
-    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
     background-color: #fff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-/* Form styling */
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    color: #666;
+}
+
+/* To-Do Form styling */
 #add-todo {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
 }
 
-#add-todo input[type="text"],
+#add-todo input,
 #add-todo textarea,
-#add-todo input[type="color"],
-#add-todo button {
+#add-todo button,
+#add-todo input[type="color"] {
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 1em;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 1px solid #ccc;
 }
 
 #add-todo button {
-    background-color: #28a745;
+    background-color: #a79028;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 #add-todo button:hover {
-    background-color: #218838;
+    background-color: #c2ae00;
 }
 
 /* To-Do List styling */
 #todo-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
-    gap: 20px;
-    list-style-type: none;
+    grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+    gap: 10px; /* Space between items */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .todo-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 15px;
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    word-wrap: break-word;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    height: 250px;
-    position: relative;
+    justify-content: space-between;
+    height: 150px; /* Fixed square height */
     overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative; /* Ensure positioning for moved notes */
+}
+
+.todo-item .content {
+    flex-grow: 1;
+    overflow-y: auto; /* Ensure content is scrollable if it overflows */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    padding-right: 10px; /* Account for scrollbar width */
 }
 
 .todo-item strong {
-    font-size: 1.2em;
+    font-size: 1em;
     color: #333;
-    margin-bottom: 10px;
 }
 
-.todo-item .details {
-    flex-grow: 1;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    padding-right: 5px;
+.details {
     color: #666;
+    margin-top: 5px;
+    max-height: 100px; /* Control the height of the content area */
 }
 
-.todo-item .actions {
+.actions {
     display: flex;
     justify-content: space-between;
+    padding-top: 10px;
+    margin-top: auto; /* Push buttons to the bottom */
 }
 
-.todo-item button {
+.actions button {
     padding: 5px 10px;
-    border: none;
     border-radius: 4px;
+    border: none;
     cursor: pointer;
-    font-size: 0.9em;
+    width: 30%;
+    text-align: center;
 }
 
-.todo-item button.edit {
-    background-color: #007bff;
+.actions .edit {
+    background-color: #ffc107;
     color: white;
 }
 
-.todo-item button.edit:hover {
-    background-color: #0056b3;
+.actions .edit:hover {
+    background-color: #e0a800;
 }
 
-.todo-item button.delete {
+.actions .delete {
     background-color: #dc3545;
     color: white;
 }
 
-.todo-item button.delete:hover {
+.actions .delete:hover {
     background-color: #c82333;
+}
+
+.actions .view {
+    background-color: #007bff;
+    color: white;
+}
+
+.actions .view:hover {
+    background-color: #0056b3;
 }
 
 /* Logout button styling */
